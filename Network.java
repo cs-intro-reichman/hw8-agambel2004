@@ -58,12 +58,18 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-        if (name1.equals(name2)) {
+        if (name1 == null || name2 == null) {
             return false;
         }
+
+        if (name1.equals(name2)) {
+            return false; 
+        }
+
         User user1 = getUser(name1);
         User user2 = getUser(name2);
-        if (user1 == null || user2 == null){
+
+        if (user1 == null || user2 == null) {
             return false;
         }
         return user1.addFollowee(name2);
@@ -141,13 +147,10 @@ public class Network {
 
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
-        String ans = "Network:\n";
+        String ans = "Network:";
         for (int i = 0; i < userCount; i++) {
-            ans += users[i].toString();
-            if (i < userCount - 1) {
-                ans += "\n";
-            }
+            ans += "\n" + users[i].toString();
         }
-        return ans;
+    return ans;
     }
 }
